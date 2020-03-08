@@ -1,5 +1,5 @@
 # Wormi
-[WgD] Discord Bot
+The official [WgD] Discord Bot under development by White Worm
 
 
 This rep is to gain experience with GitHub function.
