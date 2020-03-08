@@ -1,0 +1,7 @@
+config.ini
+pics/*
+pics/*/*
+pics/*/*/*
+cogs/__pycache__
+cogs/__pycache__/*
+!pics/placeholder.txt
