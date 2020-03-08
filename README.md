@@ -1,0 +1,2 @@
+# Wormi
+[WgD] Discord Bot
