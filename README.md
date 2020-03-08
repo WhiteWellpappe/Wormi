@@ -4,6 +4,8 @@
 This rep is to gain experience with GitHub function.
 
 
-Currently ignored:\n
-config.ini\n
-pics/*\n
+Currently ignored:
+
+config.ini
+
+pics/*
