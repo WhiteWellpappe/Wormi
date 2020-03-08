@@ -2,10 +2,11 @@
 The official [WgD] Discord Bot under development by White Worm
 
 
-This rep is to gain experience with GitHub function.
+This repo is to gain experience with GitHub functions and GitHub Desktop.
 
 
 
 Currently ignored: 
 config.ini, 
 pics/*
+__pycache__
