@@ -2,21 +2,19 @@
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
 
-import os, random, discord, datetime, configparser, sys
+import discord, datetime, configparser, sys
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command
-from openpyxl import Workbook, load_workbook
 
 
 #Variables & Initialisation__________________________________________________________________________________________________________________________________________________________
-random.seed()
 bot=commands.Bot(command_prefix='!')
 
-registered=0
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.AOO')
 bot.load_extension('cogs.YT')
+
 
 #Program____________________________________________________________________________________________________________________________________________________________________________
 @bot.event
@@ -36,9 +34,9 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send(f"{ctx.author.mention} This command doesnt exist.")
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"{ctx.author.mention} I'm missing additional information/arguments to run the command. Try !help or just ask around.")
+        await ctx.send(f"{ctx.author.mention} I'm missing additional information/arguments to run the command. Try !help or ask around.")
     elif isinstance(error, commands.TooManyArguments):
-        await ctx.send(f"{ctx.author.mention} There are to many arguments for this command. Try !help or just ask around.")
+        await ctx.send(f"{ctx.author.mention} There are to many arguments for this command. Try !help or ask around.")
     elif isinstance(error, commands.NoPrivateMessage):
         await ctx.send(f"{ctx.author.mention} This command can't be used in private channels.")
     elif isinstance(error, commands.MissingAnyRole):
@@ -89,8 +87,8 @@ async def on_member_remove(member):
     await channel.send(f'{member.mention} left the server.')
 
 
-@bot.command(name="sys.exit", help="Close Bot")
-async def quit(ctx):
+@bot.command(name="sys.exit", help="Terminate Bot")
+async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
     sys.exit(0)
 
@@ -109,7 +107,6 @@ async def DefaultHelpCommand(dm_help=True):
 
 #Token needed to access discord
 cp=configparser.ConfigParser()  
-#cp.read('/home/nico/Python/Wormi/config.ini') #Linux
-cp.read('D:/Systemzeuchs/Python/Wormi/config.ini') #Windows
+cp.read('./config.ini')
 token=cp.get('DEFAULT', 'token')
 bot.run(token)

@@ -293,7 +293,7 @@ class AOO(commands.Cog, name='AOO'):
                 #await ctx.channel.purge(limit=300)
                 #enabling writing for members
                 role=ctx.guild.get_role(530162542148976661)
-                await ctx.channel.set_permissions(role, send_messages=True)
+                await ctx.channel.set_permissions(role, read_messages=True, send_messages=True, view_channel=True)
             arg2=str(int(arg)+1)
             #sorting months into 2 groups
             m30=["4", "6", "9", "11"]
