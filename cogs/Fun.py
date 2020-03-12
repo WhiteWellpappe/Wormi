@@ -18,7 +18,7 @@ class Fun(commands.Cog, name='Fun'):
             return
         
         elif message.author.id=='547508375592632330':
-            if random.randint(1,10)==5:
+            if random.randint(1,6)==5:
                 await message.channel.send(f"{message.author.mention} Hey, I heard you wish to kill me? BRING IT ON BITCH!")
         
         elif message.channel.id==558632300737462272:
