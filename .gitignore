@@ -5,4 +5,3 @@ pics/*/*/*
 !pics/placeholder.txt
 cogs/__pycache__
 cogs/__pycache__/*
-
