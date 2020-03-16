@@ -14,8 +14,8 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="resetaoo", help="admin only, clears aoo.xlsx")
     @commands.has_any_role('Discord King', 'Leader')
     async def resetaoo(self, ctx):
-        wb1=load_workbook('/home/nico/Python/Wormi/aoo_default.xlsx')
-        wb1.save("/home/nico/Python/Wormi/aoo.xlsx")
+        wb1=load_workbook('./aoo_default.xlsx')
+        wb1.save("./aoo.xlsx")
         await ctx.send(f"{ctx.author.mention} AOO Sheet got reseted.")
     
     #Cleaning the Aoo-registration-channel
@@ -26,12 +26,19 @@ class AOO(commands.Cog, name='AOO'):
         await clean.purge(limit=1000)
         ctx.send(f"{ctx.author.mention} {clean} cleaned.")
 
+    #Sending the current aoo.xlsx
+    @commands.command(name="sendaoo", help="sends current aoo.xlsx")
+    @commands.has_any_role('Discord King', 'Leader', 'Officer')
+    async def sendaoo(self, ctx):
+        path='./aao.xlsx'
+        await ctx.send(f'{ctx.author.mention}')
+        await ctx.send(file=discord.File(path))
 
     #Members of largest AOO roster, automatically selects Saturday or Sunday
     @commands.command(name="aoolist", help="mentions all members of the largest WgD aoo list")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoolist(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         cell_a=ws.cell(row=2, column=11)
         cell_b=ws.cell(row=3, column=11)
@@ -66,7 +73,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="aoolistsat", help="mentions all members of the aoo list for saturday")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoolistsat(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         liste=""
         cell_a=ws.cell(row=2, column=11)
@@ -89,7 +96,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="aoolistsun", help="mentions all members of the aoo list for sunday")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoolistsun(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         liste=""
         cell_b=ws.cell(row=3, column=11)
@@ -112,7 +119,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="aoolistF", help="mentions all members of the WgDF aoo list")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoolistF(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         cell_c=ws.cell(row=4, column=11)
         liste=""
@@ -135,7 +142,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="aoomember", help="gives out the member count of all aoo lists")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoomember(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         cella=ws.cell(row=2, column=11)
         cellb=ws.cell(row=3, column=11)
@@ -153,7 +160,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="aoovotes", help="shows currents AOO votes")
     @commands.has_any_role('Discord King', 'Officer', 'Leader')
     async def aoovotes(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         sat=ws.cell(row=5, column=11).value
         sun=ws.cell(row=6, column=11).value
@@ -163,7 +170,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="leaveaoo", help="delete your registration and void your vote in the current aoo voting")
     @commands.has_any_role("Discord King", "Officer", "Leader", "Member")
     async def leaveaoo(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         for i in range(3, 33):
@@ -217,14 +224,14 @@ class AOO(commands.Cog, name='AOO'):
                 sat=ws.cell(row=6, column=11).value-1
                 ws.cell(row=6, column=11, value=sat)
                 break
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx') 
+        wb.save('./aoo.xlsx') 
         await ctx.send(f"{ctx.author.mention} Your registration and vote has been voided.")
 
 
     @commands.command(name="kickaoo", help="deletes registration and vote of the mentioned member")
     @commands.has_any_role("Discord King", "Officer", "Leader")
     async def kickaoo(self, ctx, mention):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         for i in range(3, 33):
             c=ws.cell(row=i, column=3)
@@ -277,7 +284,7 @@ class AOO(commands.Cog, name='AOO'):
                 sat=ws.cell(row=6, column=11).value-1
                 ws.cell(row=6, column=11, value=sat)
                 break
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx') 
+        wb.save('./aoo.xlsx') 
         await ctx.send(f"{ctx.author.mention} {mention} has been kicked from the aoo roster.")
 
 
@@ -290,10 +297,9 @@ class AOO(commands.Cog, name='AOO'):
             ctx.send(f"{ctx.author.mention} Dont forget the date! ;)")
         else:
             if ctx.channel.id==651033088943587328:
-                #await ctx.channel.purge(limit=300)
-                #enabling writing for members
+                #enabling writing/reading for members
                 role=ctx.guild.get_role(530162542148976661)
-                await ctx.channel.set_permissions(role, send_messages=True)
+                await ctx.channel.set_permissions(role, read_messages=True, send_messages=True, view_channel=True)
             arg2=str(int(arg)+1)
             #sorting months into 2 groups
             m30=["4", "6", "9", "11"]
@@ -304,20 +310,16 @@ class AOO(commands.Cog, name='AOO'):
             else:
                 if arg=="28":
                     if datetime.datetime.now().strftime("%m")=="02":
-                        if int(datetime.datetime.now().strftime("%Y"))%4!=0:
-                            arg2="1"
+                        arg2="1" if int(datetime.datetime.now().strftime("%Y"))%4!=0 else None
                 elif arg=="29":
                     if datetime.datetime.now().strftime("%m")=="02":
-                        if int(datetime.datetime.now().strftime("%Y"))%4==0:
-                            arg2="1"
+                        arg2="1" if int(datetime.datetime.now().strftime("%Y"))%4==0 else None                            
                 elif arg=="30":
                     for x in m30:
-                        if x==datetime.datetime.now().strftime("%m"):
-                            arg2="1"
+                        arg2="1" if x==datetime.datetime.now().strftime("%m") else None
                 elif arg=="31":
                     for x in m31:
-                        if x==datetime.datetime.now().strftime("%m"):
-                            arg2="1"
+                        arg2='1' if x==datetime.datetime.now().strftime("%m") else None
                 #correcting the ending
                 if int(arg)==1:
                     arg=arg+"st"
@@ -366,7 +368,7 @@ F - Sun, {arg2}, 04:00 UTC
 
 #Functions for !joinaoo_____________________________________________________________________________________________________________________________________________________________    
     def aoosat_full(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         global space
         space=0
@@ -377,7 +379,7 @@ F - Sun, {arg2}, 04:00 UTC
 
 
     def aoosat_check(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         global registered
@@ -390,7 +392,7 @@ F - Sun, {arg2}, 04:00 UTC
         return registered
 
     def aoosat_reg(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         author=ctx.author.display_name
         mention=ctx.author.mention
@@ -405,10 +407,10 @@ F - Sun, {arg2}, 04:00 UTC
                 sat=ws.cell(row=2, column=11).value+1
                 ws.cell(row=2, column=11, value=sat)
                 break  
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx') 
+        wb.save('./aoo.xlsx') 
 
     def aoosun_full(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         global space
         space=0
@@ -418,7 +420,7 @@ F - Sun, {arg2}, 04:00 UTC
         return space
 
     def aoosun_check(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         global registered
@@ -431,7 +433,7 @@ F - Sun, {arg2}, 04:00 UTC
         return registered
 
     def aoosun_reg(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         author=ctx.author.display_name
         mention=ctx.author.mention
@@ -446,10 +448,10 @@ F - Sun, {arg2}, 04:00 UTC
                 sun=ws.cell(row=3, column=11).value+1
                 ws.cell(row=3, column=11, value=sun)
                 break
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx') 
+        wb.save('./aoo.xlsx') 
 
     def aooF(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         author=ctx.author.display_name
         mention=ctx.author.mention
@@ -472,10 +474,10 @@ F - Sun, {arg2}, 04:00 UTC
                     ws.cell(row=i, column=9, value=mention)
                     ws.cell(row=4, column=11, value=i-2)
                     break   
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx')
+        wb.save('./aoo.xlsx')
 
     def sat_checkvote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         vote=0
@@ -487,7 +489,7 @@ F - Sun, {arg2}, 04:00 UTC
         return vote
     
     def sun_checkvote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         vote=0
@@ -499,7 +501,7 @@ F - Sun, {arg2}, 04:00 UTC
         return vote
 
     def sat_addvote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         sat=ws.cell(row=5, column=11).value+1
         ws.cell(row=5, column=11, value=sat)
@@ -511,10 +513,10 @@ F - Sun, {arg2}, 04:00 UTC
             else:
                 ws.cell(row=i, column=12, value=mention)
                 break
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx')
+        wb.save('./aoo.xlsx')
 
     def sun_addvote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         sun=ws.cell(row=6, column=11).value+1
         ws.cell(row=6, column=11, value=sun)
@@ -526,10 +528,10 @@ F - Sun, {arg2}, 04:00 UTC
             else:
                 ws.cell(row=i, column=13, value=mention)
                 break
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx')
+        wb.save('./aoo.xlsx')
 
     def sat_deletevote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         for i in range(1, 33):
@@ -542,10 +544,10 @@ F - Sun, {arg2}, 04:00 UTC
                 break
             else:
                 continue
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx')
+        wb.save('./aoo.xlsx')
 
     def sun_deletevote(self, ctx):
-        wb=load_workbook('/home/nico/Python/Wormi/aoo.xlsx')
+        wb=load_workbook('./aoo.xlsx')
         ws=wb.active
         mention=ctx.author.mention
         for i in range(1, 33):
@@ -558,7 +560,7 @@ F - Sun, {arg2}, 04:00 UTC
                 break
             else:
                 continue
-        wb.save('/home/nico/Python/Wormi/aoo.xlsx')
+        wb.save('./aoo.xlsx')
 
 
     #Adding people to AOO Sheet with Discord_________________________________________________________________________________________________________________________________________
