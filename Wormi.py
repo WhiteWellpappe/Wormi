@@ -13,7 +13,7 @@ bot=commands.Bot(command_prefix='!')
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.AOO')
-bot.load_extension('cogs.YT')
+bot.load_extension('cogs.YT') #WIP
 
 
 #Program____________________________________________________________________________________________________________________________________________________________________________
@@ -88,6 +88,7 @@ async def on_member_remove(member):
 
 
 @bot.command(name="sys.exit", help="Terminate Bot")
+@bot.command.needs_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
     sys.exit(0)
@@ -96,13 +97,6 @@ async def sysexit(ctx):
 #WIP
 async def DefaultHelpCommand(dm_help=True):
     pass
-
-
-#@bot.command(name="test")
-#@commands.has_any_role('Discord King')
-#async def test(ctx):
-    #await ctx.channel.purge(limit=5)
-    #await ctx.send(file=discord.File('pics\woody.jpg'))
 
 
 #Token needed to access discord

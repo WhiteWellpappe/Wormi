@@ -47,10 +47,6 @@ class Fun(commands.Cog, name='Fun'):
                         await message.channel.send(f"{message.author.mention}")
                         await message.channel.send(file=discord.File(path))
 
-                                      
-
-        #IMPORTANT
-        #await self.bot.process_commands(message)
     
     @commands.command(name='8ball', help='Magic 8 Ball, Womri answers any question')
     async def magic8ball(self, ctx):
@@ -65,34 +61,25 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="paper", help="Paper for RPS")
     async def paper(self, ctx):
         x=random.randint(1,3)
-        if x==1:
-            await ctx.send(f"{ctx.author.mention} Scissor! I won! :)")
-        if x==2:
-            await ctx.send(f"{ctx.author.mention} Rock! I lost! :(")
-        if x==3:
-            await ctx.send(f"{ctx.author.mention} Paper! A tie!")
+        await ctx.send(f"{ctx.author.mention} Scissor! I won! :)") if x==1 else None
+        await ctx.send(f"{ctx.author.mention} Rock! I lost! :(") if x==2 else None
+        await ctx.send(f"{ctx.author.mention} Paper! A tie!") if x==3 else None
 
     #RPS Rock
     @commands.command(name="rock", help="Rock for RPS")
     async def rock(self, ctx):
         x=random.randint(1,3)
-        if x==1:
-            await ctx.send(f"{ctx.author.mention} Paper! I won! :)")
-        if x==2:
-            await ctx.send(f"{ctx.author.mention} Scissor! I lost! :(")
-        if x==3:
-            await ctx.send(f"{ctx.author.mention} Rock! A tie!")
+        await ctx.send(f"{ctx.author.mention} Paper! I won! :)") if x==1 else None
+        await ctx.send(f"{ctx.author.mention} Scissor! I lost! :(") if x==2 else None
+        await ctx.send(f"{ctx.author.mention} Rock! A tie!") if x==3 else None
 
     #RPS Scissor
     @commands.command(name="scissor", help="Scissor for RPS")
     async def scissor(self, ctx):
         x=random.randint(1,3)
-        if x==1:
-            await ctx.send(f"{ctx.author.mention} Rock! I won! :)")
-        if x==2:
-            await ctx.send(f"{ctx.author.mention} Paper! I lost! :(")
-        if x==3:
-            await ctx.send(f"{ctx.author.mention} Scissor! A tie!")
+        await ctx.send(f"{ctx.author.mention} Rock! I won! :)") if x==1 else None
+        await ctx.send(f"{ctx.author.mention} Paper! I lost! :(") if x==2 else None
+        await ctx.send(f"{ctx.author.mention} Scissor! A tie!") if x==3 else None
 
 
     #J4F
@@ -105,15 +92,13 @@ class Fun(commands.Cog, name='Fun'):
     #Custom Dice rolls
     @commands.command(name="roll", help="rolls XdY dice")
     async def roll(self, ctx, arg):
-        rlist=""
-        erg=0
+        rlist, erg = ('', 0)
         try:
             arg=str(arg)
         except:
             await ctx.send("Converting Error Dice Count - Please use a valid number.")
         x=arg.find("d")
-        arg1=arg[:x]
-        arg2=arg[x+1:]
+        arg1, arg2 = (arg[:x], arg[x+1:])
         try:
             arg1=int(arg1)
             arg2=int(arg2)
@@ -125,7 +110,7 @@ class Fun(commands.Cog, name='Fun'):
             await ctx.send(f"{ctx.author.mention} Please don't roll such big dice, I can't read the numbers anymore!")
         else:
             for i in range(0,arg1):
-                rlist=rlist+"+" if rlist!=""
+                rlist=rlist+"+" if rlist!="" else None
                 r=random.randint(1,arg2)
                 rlist=rlist+str(r)
                 erg=erg+r
@@ -162,7 +147,7 @@ class Fun(commands.Cog, name='Fun'):
             await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
         else:
             ada=ctx.guild.get_member(541287316769996800)
-            pool=os.listdir('./Wormi/pics/ada')
+            pool=os.listdir('./pics/ada')
             image=random.choice(pool)
             path='./pics/ada/'+image
             await ctx.send(f"{ada.mention}")
