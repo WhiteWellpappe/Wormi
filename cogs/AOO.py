@@ -22,6 +22,7 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="cleanaoo", help="admin only, cleans 200 #aoo-registration messages")
     @commands.has_any_role('Discord King', 'Leader')
     async def cleanaoo(self, ctx):
+
         clean=self.bot.get_channel(651033088943587328)
         await clean.purge(limit=200)
         await ctx.send(f"{ctx.author.mention} {clean.mention} cleaned.")

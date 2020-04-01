@@ -2,6 +2,7 @@
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
 
+
 import discord, datetime, configparser, sys, json
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command
@@ -15,6 +16,7 @@ bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.AOO')
 bot.load_extension('cogs.YT') #WIP
 bot.remove_command('help') #Custom help command
+
 
 
 #Program____________________________________________________________________________________________________________________________________________________________________________
@@ -89,6 +91,7 @@ async def on_member_remove(member):
 
 
 @bot.command(name="sys.exit", help="Terminate Bot")
+
 @commands.has_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
@@ -108,7 +111,6 @@ async def update_json(ctx):
     await ctx.send(f"{ctx.author.mention} JSON updated.")
 
 
-#WIP
 @bot.command(name='help', help='Shows all commands')
 async def CustomHelpCommand(ctx):
     embed=discord.Embed(
@@ -151,7 +153,7 @@ async def CustomHelpCommand(ctx):
     embed.add_field(name=":tools: Tools:", value=helptext4, inline=False)
     await ctx.send(embed=embed)
 
-
+    
 #Token needed to access discord
 cp=configparser.ConfigParser()  
 cp.read('./config.ini')

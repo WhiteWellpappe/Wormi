@@ -1,5 +1,6 @@
 *.ini
 *.json
+config.ini
 pics/*
 pics/*/*
 pics/*/*/*
@@ -8,4 +9,3 @@ __pycache__/*
 cogs/__pycache__
 cogs/__pycache__/*
 ttt.py
-
