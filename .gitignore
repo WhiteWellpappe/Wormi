@@ -4,6 +4,7 @@ pics/*
 pics/*/*
 pics/*/*/*
 !pics/placeholder.txt
+__pycache__/*
 cogs/__pycache__
 cogs/__pycache__/*
 ttt.py
