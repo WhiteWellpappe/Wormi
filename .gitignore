@@ -1,8 +1,10 @@
-config.ini
+*.ini
+*.json
 pics/*
 pics/*/*
 pics/*/*/*
 !pics/placeholder.txt
 cogs/__pycache__
 cogs/__pycache__/*
+ttt.py
 

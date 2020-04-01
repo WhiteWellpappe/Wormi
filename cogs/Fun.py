@@ -1,4 +1,4 @@
-import random, discord, os
+import random, discord, os, re, json
 from discord.ext import commands
 
 random.seed()
@@ -48,7 +48,7 @@ class Fun(commands.Cog, name='Fun'):
                         await message.channel.send(file=discord.File(path))
 
     
-    @commands.command(name='8ball', help='Magic 8 Ball, Womri answers any question')
+    @commands.command(name='8ball', help='Magic 8 Ball, Wormi answers any question')
     async def magic8ball(self, ctx):
             answer=['It is as certain as WW is awesome.','It is decidedly so.','Without a doubt.','Yes - definitely.','You may rely on it.','As I see it, yes.','Most likely.',
             'Outlook good.','Yes.','Signs point to yes.','Reply hazy, try again.','Ask again later.','Better not tell you now.','Cannot predict now, better ask Meg.','Concentrate and ask again.',
@@ -211,6 +211,16 @@ class Fun(commands.Cog, name='Fun'):
     
     @commands.command(name="burn", help="In WgD discord, Wormi burns you!")
     async def burn(self, ctx, target):
-        server=self.bot.get_guild(530157406349688862)
-        mem=server.get_member_named(target)
-        await ctx.send(f"{mem.mention} :fire::fire::fire:") if mem!=None else await ctx.send(f"{ctx.author.mention} Sorry, I couldnt find any member.")
+        if len(target)>3:
+            target=f"\\w*{target}*\\w*"
+        else:
+            target=f"\\w*{target}\\w*"
+        regex=re.compile(target, re.I)
+        with open ("./member.json", "r") as d:
+            dic=json.load(d)
+        for key in dic:
+            if regex.search(key)!=None:
+                await ctx.send(f"{dic[key]} :fire::fire::fire:")
+                break
+            else:
+                continue

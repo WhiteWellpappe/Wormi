@@ -2,7 +2,7 @@
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
 
-import discord, datetime, configparser, sys
+import discord, datetime, configparser, sys, json
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command
 
@@ -14,6 +14,7 @@ bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.AOO')
 bot.load_extension('cogs.YT') #WIP
+bot.remove_command('help') #Custom help command
 
 
 #Program____________________________________________________________________________________________________________________________________________________________________________
@@ -88,15 +89,67 @@ async def on_member_remove(member):
 
 
 @bot.command(name="sys.exit", help="Terminate Bot")
-@bot.command.needs_any_role('Discord King', 'Leader')
+@commands.has_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
     sys.exit(0)
 
 
+@bot.command(name="updatejson")
+@commands.has_any_role('Discord King', 'Leader')
+async def update_json(ctx):
+    memlist=ctx.guild.members
+    dic={}
+    for mem in memlist:
+        dic[mem.display_name]=mem.mention
+    with open ('./member.json', 'w') as d:
+        json.dump(dic, d)
+        d.truncate()
+    await ctx.send(f"{ctx.author.mention} JSON updated.")
+
+
 #WIP
-async def DefaultHelpCommand(dm_help=True):
-    pass
+@bot.command(name='help', help='Shows all commands')
+async def CustomHelpCommand(ctx):
+    embed=discord.Embed(
+        colour=discord.Colour.gold(),
+        title= "Help")
+    helptext1=""
+    for command in bot.commands:
+        if command.cog==None:
+            if len(helptext1)>1:
+                helptext1+=f", `{command}`"
+            else:
+                helptext1 +=f"`{command}`"
+    embed.add_field(name=":bug: General", value=helptext1, inline=False)
+    helptext2=""
+    for command in bot.commands:
+        if command.cog!=None:
+            if command.cog.qualified_name=="AOO":
+                if len(helptext2)>1:
+                    helptext2+=f", `{command}`"
+                else:
+                    helptext2+=f"`{command}`"
+    embed.add_field(name=":crossed_swords: Ark of Osiris:", value=helptext2, inline=False)
+    helptext3=""
+    for command in bot.commands:
+        if command.cog!=None:
+            if command.cog.qualified_name=="Fun":
+                if len(helptext3)>1:
+                    helptext3+=f", `{command}`"
+                else:
+                    helptext3+=f"`{command}`"
+    embed.add_field(name=":partying_face: Fun:", value=helptext3, inline=False)
+    helptext4=""
+    for command in bot.commands:
+        if command.cog!=None:
+            if command.cog.qualified_name=="Tools":
+                if len(helptext4)>1:
+                    helptext4+=f", `{command}`"
+                else:
+                    helptext4+=f"`{command}`"
+    embed.add_field(name=":tools: Tools:", value=helptext4, inline=False)
+    await ctx.send(embed=embed)
 
 
 #Token needed to access discord
