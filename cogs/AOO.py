@@ -19,18 +19,19 @@ class AOO(commands.Cog, name='AOO'):
         await ctx.send(f"{ctx.author.mention} AOO Sheet got reseted.")
     
     #Cleaning the Aoo-registration-channel
-    @commands.command(name="cleanaoo", help="admin only, cleans #aoo-registration")
+    @commands.command(name="cleanaoo", help="admin only, cleans 200 #aoo-registration messages")
     @commands.has_any_role('Discord King', 'Leader')
     async def cleanaoo(self, ctx):
-        clean=self.bot.get.channel(651033088943587328)
-        await clean.purge(limit=1000)
-        ctx.send(f"{ctx.author.mention} {clean} cleaned.")
+
+        clean=self.bot.get_channel(651033088943587328)
+        await clean.purge(limit=200)
+        await ctx.send(f"{ctx.author.mention} {clean.mention} cleaned.")
 
     #Sending the current aoo.xlsx
     @commands.command(name="sendaoo", help="sends current aoo.xlsx")
     @commands.has_any_role('Discord King', 'Leader', 'Officer')
     async def sendaoo(self, ctx):
-        path='./aao.xlsx'
+        path='./aoo.xlsx'
         await ctx.send(f'{ctx.author.mention}')
         await ctx.send(file=discord.File(path))
 
