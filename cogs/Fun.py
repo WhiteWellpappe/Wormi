@@ -208,6 +208,17 @@ class Fun(commands.Cog, name='Fun'):
             path='./pics/pizza/'+image
             await ctx.send(f"{ctx.author.mention}")
             await ctx.send(file=discord.File(path))
+
+    @commands.command(name="tp", help="some toilet paper")
+    async def tp(self, ctx):
+        if ctx.channel.id!=558632300737462272:
+            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+        else:
+            pool=os.listdir('./pics/tp')
+            image=random.choice(pool)
+            path='./pics/tp/'+image
+            await ctx.send(f"{ctx.author.mention}")
+            await ctx.send(file=discord.File(path))
     
     @commands.command(name="burn", help="In WgD discord, Wormi burns you!")
     async def burn(self, ctx, target):
