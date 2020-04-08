@@ -4,7 +4,7 @@
 
 import discord, datetime, configparser, sys, json
 from discord.ext import commands
-from discord.ext.commands import Bot, check, CheckFailure, command
+from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
 
 #Variables & Initialisation__________________________________________________________________________________________________________________________________________________________
@@ -114,8 +114,13 @@ async def CustomHelpCommand(ctx):
     embed=discord.Embed(
         colour=discord.Colour.gold(),
         title= "Help")
+    #sorting out all non-usable commands for calling user
+    total_commands=bot.commands
+    print(total_commands)
+    comm=await HelpCommand.filter_commands(total_commands, total_commands, sort=False, key=None) #ERROR Type=Set
+    print(comm)
     helptext1=""
-    for command in bot.commands:
+    for command in comm:
         if command.cog==None:
             if len(helptext1)>1:
                 helptext1+=f", `{command}`"
@@ -123,7 +128,7 @@ async def CustomHelpCommand(ctx):
                 helptext1 +=f"`{command}`"
     embed.add_field(name=":bug: General", value=helptext1, inline=False)
     helptext2=""
-    for command in bot.commands:
+    for command in comm:
         if command.cog!=None:
             if command.cog.qualified_name=="AOO":
                 if len(helptext2)>1:
@@ -132,7 +137,7 @@ async def CustomHelpCommand(ctx):
                     helptext2+=f"`{command}`"
     embed.add_field(name=":crossed_swords: Ark of Osiris:", value=helptext2, inline=False)
     helptext3=""
-    for command in bot.commands:
+    for command in comm:
         if command.cog!=None:
             if command.cog.qualified_name=="Fun":
                 if len(helptext3)>1:
@@ -141,7 +146,7 @@ async def CustomHelpCommand(ctx):
                     helptext3+=f"`{command}`"
     embed.add_field(name=":partying_face: Fun:", value=helptext3, inline=False)
     helptext4=""
-    for command in bot.commands:
+    for command in comm:
         if command.cog!=None:
             if command.cog.qualified_name=="Tools":
                 if len(helptext4)>1:
