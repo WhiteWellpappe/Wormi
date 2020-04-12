@@ -5,6 +5,16 @@ The official [WgD] Discord Bot under development by White Worm
 This repo is to gain experience with GitHub functions and to protocol changes.
 
 
+v1.3
+
+CHANGES:
+- added permission changes to !aoo and new try/except check (thanks woody!)
+
+NEW:
+- !hangman - play a nice round of hangman with Wormi, alone or with friends
+
+
+
 v1.2
 
 CHANGES:
