@@ -5,7 +5,7 @@
 
 import discord, datetime, configparser, sys, json
 from discord.ext import commands
-from discord.ext.commands import Bot, check, CheckFailure, command
+from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
 
 #Variables & Initialisation__________________________________________________________________________________________________________________________________________________________
@@ -16,7 +16,6 @@ bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.AOO')
 bot.load_extension('cogs.YT') #WIP
 bot.remove_command('help') #Custom help command
-
 
 
 #Program____________________________________________________________________________________________________________________________________________________________________________
@@ -91,7 +90,6 @@ async def on_member_remove(member):
 
 
 @bot.command(name="sys.exit", help="Terminate Bot")
-
 @commands.has_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
@@ -111,11 +109,17 @@ async def update_json(ctx):
     await ctx.send(f"{ctx.author.mention} JSON updated.")
 
 
+
+#WIP
 @bot.command(name='help', help='Shows all commands')
 async def CustomHelpCommand(ctx):
     embed=discord.Embed(
         colour=discord.Colour.gold(),
         title= "Help")
+    #sorting out all non-usable commands for calling user
+    #total_commands=bot.commands
+    #print(total_commands)
+    #comm=await HelpCommand.filter_commands(total_commands, total_commands, sort=False, key=None) #ERROR Type=Set
     helptext1=""
     for command in bot.commands:
         if command.cog==None:
@@ -153,7 +157,7 @@ async def CustomHelpCommand(ctx):
     embed.add_field(name=":tools: Tools:", value=helptext4, inline=False)
     await ctx.send(embed=embed)
 
-    
+
 #Token needed to access discord
 cp=configparser.ConfigParser()  
 cp.read('./config.ini')

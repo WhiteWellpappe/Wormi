@@ -1,5 +1,6 @@
 *.ini
 *.json
+aoo.xlsx
 config.ini
 pics/*
 pics/*/*

@@ -26,4 +26,4 @@ class Tools(commands.Cog, name='Tools'):
     @commands.has_any_role('Discord King', 'Leader', 'Officer')
     async def checkinactive (self, ctx):
         count=await ctx.guild.estimate_pruned_members(days=30)
-        await ctx.send(f"{ctx.author.mention} {count} members are inactive.") 
+        await ctx.send(f"{ctx.author.mention} {count} members are inactive.")  

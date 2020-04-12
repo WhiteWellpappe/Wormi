@@ -1,4 +1,4 @@
-import random, discord, os, re, json
+import random, discord, os, re, json, asyncio
 from discord.ext import commands
 
 random.seed()
@@ -109,7 +109,7 @@ class Fun(commands.Cog, name='Fun'):
         elif arg2>300:
             await ctx.send(f"{ctx.author.mention} Please don't roll such big dice, I can't read the numbers anymore!")
         else:
-            for i in range(0,arg1):
+            for _ in range(0,arg1):
                 rlist=rlist+"+" if rlist!="" else None
                 r=random.randint(1,arg2)
                 rlist=rlist+str(r)
@@ -120,7 +120,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="piney", help="just to troll woody")
     async def piney(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             woody=ctx.guild.get_member(548926176316358657)
             path="./pics/woody.jpg"
@@ -131,7 +131,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="deedee", help="revenge for woody")
     async def deedee(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             deedee=ctx.guild.get_member(548924284836380698)
             pool=os.listdir('./pics/deedee')
@@ -144,7 +144,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="ada", help="revenge for woody")
     async def ada(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             ada=ctx.guild.get_member(541287316769996800)
             pool=os.listdir('./pics/ada')
@@ -157,7 +157,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="nana", help="no idea")
     async def nana(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             lucky=ctx.guild.get_member(602110022394052618)
             path="./pics/nana.jpg"
@@ -167,7 +167,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="lama", help="random lama")
     async def lama(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             pool=os.listdir('./pics/lama')
             image=random.choice(pool)
@@ -178,7 +178,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="pet", help="random WgD moral support")
     async def pet(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             pool=os.listdir('./pics/pet')
             image=random.choice(pool)
@@ -189,7 +189,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="hardjan", help="deedee's rok bf")
     async def hardjan(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             hardjan=ctx.guild.get_member(341379990228697090)
             pool=os.listdir('./pics/hardjan')
@@ -201,7 +201,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="pizza", help="random pizza")
     async def pizza(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             pool=os.listdir('./pics/pizza')
             image=random.choice(pool)
@@ -212,7 +212,7 @@ class Fun(commands.Cog, name='Fun'):
     @commands.command(name="tp", help="some toilet paper")
     async def tp(self, ctx):
         if ctx.channel.id!=558632300737462272:
-            await ctx.send(f"{ctx.author.mention} Only use this in the chat channel please. ;)")   
+            await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
             pool=os.listdir('./pics/tp')
             image=random.choice(pool)
@@ -235,3 +235,140 @@ class Fun(commands.Cog, name='Fun'):
                 break
             else:
                 continue
+    
+    
+    @commands.command(name="hangman", help="play hangman with wormi!")
+    async def hangman(self, ctx):
+        stage=[ #raw AND escaping to deal with discord formatting
+r"""
+    \_\_\_\_\_\_\_\_\_
+    |\/
+    |
+    |
+    |
+    |
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_\_
+    |\/   |
+    |
+    |
+    |
+    |
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |
+    |
+    |  
+    |       
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |     |
+    |     |
+    |
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |   \/|
+    |     |
+    |
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |   \/|\
+    |     |
+    |
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |   \/|\
+    |     |
+    |   \/
+    |
+    |\_\_\_""",
+r"""
+    \_\_\_\_\_\_\_\_
+    |\/   |
+    |   (\_)
+    |   \/|\
+    |     |
+    |   \/ \
+    |
+    |\_\_\_"""]
+        words=["automobile", "cookies", "homeoffice", "wormageddon", "cheese", "dice", "bottle", "gaming", "riseofkingdoms", "bacon", "caterpillar", "servant", "geometry", "halloween", "telephone", "triangle", "farming", "hunting", "trade", "vegetable", "border", "grandmother", "policeman", "remarkable", "occasionally", "explanation", "fireplace", "discussion", "manufacturing", "mathematics", "biology", "shark", "tiger", "dolphin", "horse", "beer", "distance", "mysterious", "selection", "communism", "capitalism", "arrangement", "doctor", "raft", "waterfall", "jungle", "teabag"]
+        if ctx.channel.id!=697082176432373831:
+            await ctx.send(f"{ctx.author.mention} Please use {self.bot.get_channel(697082176432373831).mention}.")
+        else:
+            word=random.choice(words)
+            mask="`"
+            for _ in range(len(word)):
+                mask+=r"_ "
+            mask+="`"
+            turn, wrong=0, ""
+            name, text="default", "default"
+            embed=discord.Embed(colour=discord.Colour.gold(), title= "Hangman")
+            playing=True
+            while playing:
+                embed.clear_fields()
+                name=(f"{stage[turn]}\n")
+                text=(f"{mask}\nWrong letters: {wrong}\nPlease make your guess.\n")
+                #text+=(f"Wrong letters: {wrong}\n")
+                #text+=(f"Please make your guess.\n")
+                embed.add_field(name=name, value=text, inline=False)
+                await ctx.send(embed=embed)
+
+                #custom check for wait_for
+                def check(waited):
+                    return waited.author.bot==False and waited.channel.id==697082176432373831
+                
+                try:
+                    mes=await self.bot.wait_for("message", timeout=30, check=check)
+                except asyncio.TimeoutError:
+                    await ctx.send(f"Time is over! The word was '{word}'.")
+                    playing=False
+                    break
+                char=mes.content.lower()
+                if char=="ff":
+                    await ctx.send("You forfeited.")
+                    playing=False
+                    break
+                elif (len(char)>1) or (char not in "abcdefghijklmnopqrstuvwxyz") or (char in wrong):
+                    continue
+                correct=False
+                for p, l in enumerate(word):
+                    if l==char:
+                        mask=mask[0:2*p+1]+l+mask[2*p+2:]
+                        correct=True
+                if "_" not in mask:
+                    await ctx.send(mask)
+                    await ctx.send(f"Congratulations! You won! The correct word was {word}.")
+                    playing=False
+                    break
+                elif correct==False and turn==6:
+                    await ctx.send(f"You lost! The correct word was {word}.")
+                    playing=False
+                    break
+                else:
+                    if correct:
+                        await ctx.send("Correct!")
+                    else:
+                        await ctx.send("Incorrect!")
+                        wrong+=f"{char} "
+                        turn+=1

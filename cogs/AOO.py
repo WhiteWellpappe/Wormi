@@ -22,7 +22,6 @@ class AOO(commands.Cog, name='AOO'):
     @commands.command(name="cleanaoo", help="admin only, cleans 200 #aoo-registration messages")
     @commands.has_any_role('Discord King', 'Leader')
     async def cleanaoo(self, ctx):
-
         clean=self.bot.get_channel(651033088943587328)
         await clean.purge(limit=200)
         await ctx.send(f"{ctx.author.mention} {clean.mention} cleaned.")
@@ -297,10 +296,10 @@ class AOO(commands.Cog, name='AOO'):
         if arg==None:
             ctx.send(f"{ctx.author.mention} Dont forget the date! ;)")
         else:
-            if ctx.channel.id==651033088943587328:
-                #enabling writing/reading for members
-                role=ctx.guild.get_role(530162542148976661)
-                await ctx.channel.set_permissions(role, read_messages=True, send_messages=True, view_channel=True)
+            try:
+                _=int(arg)
+            except:
+                await ctx.send(f"{ctx.author.mention} Please check the command again. An error occoured and I caught it so you don't wreck the channel like Woody did once.")
             arg2=str(int(arg)+1)
             #sorting months into 2 groups
             m30=["4", "6", "9", "11"]
@@ -338,7 +337,6 @@ class AOO(commands.Cog, name='AOO'):
                     arg2=arg2+"rd"
                 else:
                     arg2=arg2+"th"
-
                 await ctx.send(f"""@everyone
 
 :loudspeaker: AOO Voting!
@@ -364,6 +362,10 @@ F - Sun, {arg2}, 04:00 UTC
 :cheese: If someone enlists for both Main and Farm we assume your farm will play AOO in WgDF
 
 :carrot: If you encounter an error, please hit up any R4 right away.""")
+        if ctx.channel.id==651033088943587328:
+            #enabling writing/reading/history for members
+            role=ctx.guild.get_role(530162542148976661)
+            await ctx.channel.set_permissions(role, read_messages=True, send_messages=True, view_channel=True, read_message_history=True)
 
 
 
@@ -696,7 +698,7 @@ F - Sun, {arg2}, 04:00 UTC
                 elif regsat==1 and regsun==1:
                     await ctx.send(f" {ctx.author.mention} You are already registered for both days. You voted Sunday")            
             #registering for WgDF
-            elif arg=="F":
+            elif arg=="F" or arg=="f":
                 self.aooF(ctx)
                 if registered==0:
                     await ctx.send(f"{ctx.author.mention} has been added to the AOO roster for **SUNDAY 4 UTC** at **WgDF**")
