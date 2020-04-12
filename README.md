@@ -6,7 +6,9 @@ This repo is to gain experience with GitHub functions and to protocol changes.
 
 
 
+
 v1.3
+
 CHANGES:
 - added permission changes to !aoo and new try/except check (thanks woody!)
 NEW:
@@ -15,6 +17,7 @@ NEW:
 
 
 v1.2
+
 CHANGES:
 - custom !help command
 - improved search algorithm for !burn using a json file and regular expressions
@@ -26,6 +29,7 @@ NEW:
 
 
 v1.1
+
 CHANGES:
 - !burn - mentioning not longer needed
 - absolute filepaths changed into relative path for more flexibility
