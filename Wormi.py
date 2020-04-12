@@ -2,6 +2,7 @@
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
 
+
 import discord, datetime, configparser, sys, json
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
@@ -108,6 +109,7 @@ async def update_json(ctx):
     await ctx.send(f"{ctx.author.mention} JSON updated.")
 
 
+
 #WIP
 @bot.command(name='help', help='Shows all commands')
 async def CustomHelpCommand(ctx):
@@ -118,7 +120,6 @@ async def CustomHelpCommand(ctx):
     #total_commands=bot.commands
     #print(total_commands)
     #comm=await HelpCommand.filter_commands(total_commands, total_commands, sort=False, key=None) #ERROR Type=Set
-    #print(comm)
     helptext1=""
     for command in bot.commands:
         if command.cog==None:

@@ -1,8 +1,9 @@
 # Wormi
 The official [WgD] Discord Bot under development by White Worm
 
-
 This repo is to gain experience with GitHub functions and to protocol changes.
+
+
 
 
 v1.3
@@ -24,6 +25,7 @@ CHANGES:
 
 NEW:
 - !updatejson - updating member.json to match current users
+- !tp to provide some toilet paper in these harsh times
 
 
 
