@@ -43,10 +43,7 @@ CHANGES:
 
 NEW:
 - !updatejson - updating member.json to match current users
-<<<<<<< HEAD
 - !tp to provide some toilet paper in these harsh times
-=======
->>>>>>> desktop-test
 
 
 
@@ -63,8 +60,4 @@ NEW:
 - !kickinactive - kicks all inactive, roleless members
 - !cleanaoo - purging 1000 messages in #aoo-registration
 - !sendaoo - sending the current aoo.xlsx file
-<<<<<<< HEAD
 - !sysexit - shutting down Wormi for faster testing
-=======
-- !sysexit - shutting down Wormi for faster testing
->>>>>>> desktop-test
