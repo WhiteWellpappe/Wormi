@@ -8,5 +8,6 @@ pics/*/*/*
 __pycache__/*
 cogs/__pycache__
 cogs/__pycache__/*
-ttt.py
-hangman.py
+.google-cookie
+.vscode
+version.txt

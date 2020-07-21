@@ -1,8 +1,26 @@
 # Wormi
-The official [WgD] Discord Bot under development by White Worm
+The official [WgD] and [VpS] Discord Bot under development by White Worm
 
 
-This repo is to gain experience with GitHub functions and to protocol changes.
+This reposition is to gain experience with Git/GitHub functions and to protocol changes.
+
+
+
+v2.0
+
+With introducing a new AOO registration system some time ago and accessing the [VpS] server it's time to get to version 2.0 
+
+CHANGES:
+- experiemental loop for aoo to reduce API calls and increase stability, requires further testing
+- commands adapted to work in 2 different servers, including .json management
+
+NEW:
+- new aoo registration using reactions
+- several new requested commands
+- very simple automated check for updates
+- !restart - restarting Wormi for faster testing
+- !google - showing first google search result for given keywords
+
 
 
 v1.3
