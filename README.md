@@ -1,11 +1,34 @@
 # Wormi
-The official [WgD] Discord Bot under development by White Worm
+The official [WgD] and [VpS] Discord Bot under development by White Worm
 
 This repo is to gain experience with GitHub functions and to protocol changes.
 
+<<<<<<< HEAD
 
 
 
+=======
+This reposition is to gain experience with Git/GitHub functions and to protocol changes.
+
+
+
+v2.0
+
+With introducing a new AOO registration system some time ago and accessing the [VpS] server it's time to get to version 2.0 
+
+CHANGES:
+- experiemental loop for aoo to reduce API calls and increase stability, requires further testing
+- commands adapted to work in 2 different servers, including .json management
+
+NEW:
+- new aoo registration using reactions
+- several new requested commands
+- very simple automated check for updates
+- !restart - restarting Wormi for faster testing
+- !google - showing first google search result for given keywords
+
+
+>>>>>>> desktop-test
 
 v1.3
 
@@ -26,7 +49,10 @@ CHANGES:
 
 NEW:
 - !updatejson - updating member.json to match current users
+<<<<<<< HEAD
 - !tp to provide some toilet paper in these harsh times
+=======
+>>>>>>> desktop-test
 
 
 
@@ -43,4 +69,8 @@ NEW:
 - !kickinactive - kicks all inactive, roleless members
 - !cleanaoo - purging 1000 messages in #aoo-registration
 - !sendaoo - sending the current aoo.xlsx file
+<<<<<<< HEAD
 - !sysexit - shutting down Wormi for faster testing
+=======
+- !sysexit - shutting down Wormi for faster testing
+>>>>>>> desktop-test

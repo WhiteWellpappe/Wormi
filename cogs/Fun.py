@@ -1,4 +1,8 @@
 import random, discord, os, re, json, asyncio
+<<<<<<< HEAD
+=======
+from googlesearch import search
+>>>>>>> desktop-test
 from discord.ext import commands
 
 random.seed()
@@ -11,17 +15,28 @@ class Fun(commands.Cog, name='Fun'):
     def __init__(self, bot):
         self.bot = bot
 
+    def checkchannel(self):
+        if self.guild.id==717760982729883689:#Vps
+            return self.channel.id==717760982729883692
+        elif self.guild.id==530157406349688862:#WgD
+            return self.channel.id==558632300737462272
+
+
     @commands.Cog.listener()
     async def on_message(self, message):
         m=str(message.content)
         if message.author.bot:
-            return
-        
+            return        
         elif message.author.id=='547508375592632330':
             if random.randint(1,6)==5:
+<<<<<<< HEAD
                 await message.channel.send(f"{message.author.mention} Hey, I heard you wish to kill me? BRING IT ON BITCH!")
         
         elif message.channel.id==558632300737462272:
+=======
+                await message.channel.send(f"{message.author.mention} Hey, I heard you wish to kill me? BRING IT ON BITCH!")       
+        elif message.channel.id==558632300737462272 or message.channel.id==717760982729883692:
+>>>>>>> desktop-test
             if ("Wormi" in m) or ("wormi" in m):
                 if "show" in m:
                     if ("lama" in m) or ("alpaca" in m):
@@ -116,9 +131,12 @@ class Fun(commands.Cog, name='Fun'):
                 erg=erg+r
             await ctx.send(f"{ctx.author.mention} {rlist} = {erg}")
 
+
     #Trolling Woody
-    @commands.command(name="piney", help="just to troll woody")
+    @commands.command(name="piney", aliases=["woody", "Piney", "Woody"], help="just to troll woody")
+    @commands.check(checkchannel)
     async def piney(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -126,10 +144,21 @@ class Fun(commands.Cog, name='Fun'):
             path="./pics/woody.jpg"
             await ctx.send(f"{woody.mention}")
             await ctx.send(file=discord.File(path))
+=======
+        woody=ctx.guild.get_member(548926176316358657)
+        path="./pics/woody.jpg"
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Woody", description=f"{woody.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{woody.mention}",file=image, embed=embed)
+
+>>>>>>> desktop-test
 
     #Trolling Deedee
-    @commands.command(name="deedee", help="revenge for woody")
+    @commands.command(name="deedee", aliases=["dee", "Dee", "DeeDee", "Deedee"], help="revenge for woody")
+    @commands.check(checkchannel)
     async def deedee(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -139,10 +168,23 @@ class Fun(commands.Cog, name='Fun'):
             path='./pics/deedee/'+image
             await ctx.send(f"{deedee.mention}")
             await ctx.send(file=discord.File(path))
+=======
+        deedee=ctx.guild.get_member(548924284836380698)
+        pool=os.listdir('./pics/deedee')
+        image=random.choice(pool)
+        path='./pics/deedee/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Deedee", description=f"{deedee.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{deedee.mention}",file=image, embed=embed)
+
+>>>>>>> desktop-test
 
     #Trolling Ada
     @commands.command(name="ada", help="revenge for woody")
+    @commands.check(checkchannel)
     async def ada(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -152,10 +194,23 @@ class Fun(commands.Cog, name='Fun'):
             path='./pics/ada/'+image
             await ctx.send(f"{ada.mention}")
             await ctx.send(file=discord.File(path))
+=======
+        ada=ctx.guild.get_member(541287316769996800)
+        pool=os.listdir('./pics/ada')
+        image=random.choice(pool)
+        path='./pics/ada/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Ada", description=f"{ada.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{ada.mention}",file=image, embed=embed)
+
+>>>>>>> desktop-test
 
     #Trolling Nana/Lucky
     @commands.command(name="nana", help="no idea")
+    @commands.check(checkchannel)
     async def nana(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -174,9 +229,32 @@ class Fun(commands.Cog, name='Fun'):
             path='./pics/lama/'+image
             await ctx.send(f"{ctx.author.mention}")
             await ctx.send(file=discord.File(path))
+=======
+        lucky=ctx.guild.get_member(602110022394052618)
+        path="./pics/nana.jpg"
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Nana", description=f"{lucky.mention} behave!", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{lucky.mention}",file=image, embed=embed)
 
-    @commands.command(name="pet", help="random WgD moral support")
+
+    @commands.command(name="lama", aliases=["Lama"], help="random lama")
+    @commands.check(checkchannel)
+    async def lama(self, ctx):
+        pool=os.listdir('./pics/lama')
+        image=random.choice(pool)
+        path='./pics/lama/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Lama", description=f"{ctx.author.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed)
+>>>>>>> desktop-test
+
+
+    @commands.command(name="pet", aliases=["Pet"], help="random WgD moral support")
+    @commands.check(checkchannel)
     async def pet(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -185,9 +263,21 @@ class Fun(commands.Cog, name='Fun'):
             path='./pics/pet/'+image
             await ctx.send(f"Moral support arrived {ctx.author.mention}! I am showing {image}")
             await ctx.send(file=discord.File(path))
+=======
+        pool=os.listdir('./pics/pet')
+        image=random.choice(pool)
+        path='./pics/pet/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Moral support", description=f"Moral support arrived {ctx.author.mention}! I am showing {image}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed) 
 
-    @commands.command(name="hardjan", help="deedee's rok bf")
+>>>>>>> desktop-test
+
+    @commands.command(name="hardjan", aliases=["Hardjan", "Hard"], help="deedee's rok bf")
+    @commands.check(checkchannel)
     async def hardjan(self, ctx):
+<<<<<<< HEAD
         if ctx.channel.id!=558632300737462272:
             await ctx.send(f"{ctx.author.mention} Please use the {self.bot.get_channel(558632300737462272).mention}. ;)")   
         else:
@@ -237,11 +327,147 @@ class Fun(commands.Cog, name='Fun'):
                 continue
     
     
+=======
+        hardjan=ctx.guild.get_member(341379990228697090)
+        pool=os.listdir('./pics/hardjan')
+        image=random.choice(pool)
+        path='./pics/hardjan/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Hardjan", description=f"{hardjan.mention} aka Deedee's RoK boyfriend", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{hardjan.mention}",file=image, embed=embed)   
+
+
+    @commands.command(name="pizza", aliases=["Pizza"], help="random pizza")
+    @commands.check(checkchannel)
+    async def pizza(self, ctx):
+        pool=os.listdir('./pics/pizza')
+        image=random.choice(pool)
+        path='./pics/pizza/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Pizza", description=f"{ctx.author.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed) 
+
+
+    @commands.command(name="tp", help="some toilet paper")
+    @commands.check(checkchannel)
+    async def tp(self, ctx):
+        pool=os.listdir('./pics/tp')
+        image=random.choice(pool)
+        path='./pics/tp/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="TP", description=f"{ctx.author.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed) 
+
+
+    @commands.command(name="chris", aliases=["chri5", "Chris", "Chri5"], help="our friendly whale")
+    @commands.check(checkchannel)
+    async def chris(self, ctx):
+        chris=ctx.guild.get_member(404296742872416258)
+        pool=os.listdir('./pics/chris')
+        image=random.choice(pool)
+        path='./pics/chris/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Chris", description=f"{chris.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{chris.mention}",file=image, embed=embed) 
+
+
+    @commands.command(name="sexychris", aliases=["sexychri5", "SexyChris", "Sexychris", "SexyChri5", "Sexychri5"], help="our sexy whale")
+    @commands.check(checkchannel)
+    async def sexychris(self, ctx):
+        chris=ctx.guild.get_member(404296742872416258)
+        path='./pics/chris/chris_sexy.jpg'
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Sexy Chris", description=f"{chris.mention} Hey sexy :smirk:", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{chris.mention}", file=image, embed=embed)  
+
+
+    @commands.command(name="dez", help="rip doggo")
+    @commands.check(checkchannel)
+    async def dez(self, ctx):
+        pool=os.listdir('./pics/dez')
+        dez=ctx.guild.get_member(142121221893390336)
+        image=random.choice(pool)
+        path='./pics/dez/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Dez", description=f"{dez.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(f"{dez.mention}", file=image, embed=embed)   
+
+
+    @commands.command(name="mork", aliases=["m0rk", "Mork", "M0rk"], help="that's him - probably on the toilet")
+    @commands.check(checkchannel)
+    async def mork(self, ctx):
+        pool=os.listdir('./pics/mork')
+        mork=ctx.guild.get_member(520167922367201280)
+        image=random.choice(pool)
+        path='./pics/mork/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Mork", description=f"{mork.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed) 
+
+
+    @commands.command(name="pumba", aliases=["pumbaa", "Pumba", "Pumbaa"], help="pumbaa /shrug")
+    @commands.check(checkchannel)
+    async def dez(self, ctx):
+        pool=os.listdir('./pics/pumba')
+        pumba=ctx.guild.get_member(517098993180868642)
+        image=random.choice(pool)
+        path='./pics/pumba/'+image
+        image=discord.File(path, filename="image.png")
+        embed=discord.Embed(title="Pumba", description=f"{pumba.mention}", color=discord.Colour.gold())
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=image, embed=embed)  
+
+
+    @commands.command(name="burn", help="In discord, Wormi burns you!")
+    async def burn(self, ctx, target):
+        if len(target)>3:
+            target=f"\\w*{target}*\\w*"
+        else:
+            target=f"\\w*{target}\\w*"
+        regex=re.compile(target, re.I)
+        if ctx.guild.id==530157406349688862:#WgD
+            with open ("./memberWgD.json", "r") as d:
+                dic=json.load(d)
+        elif ctx.guild.id==717760982729883689:#VpS
+            with open ("./memberVpS.json", "r") as d:
+                dic=json.load(d)            
+        for key in dic:
+            if regex.search(key)!=None:
+                await ctx.send(f"{dic[key]} <a:panda_fire:715502370229846027><a:panda_fire:715502370229846027><a:panda_fire:715502370229846027>")
+                break
+            else:
+                continue
+
+
+    @commands.command(name="google", help="first google result")
+    async def google(self, ctx, *, arg):
+        glist=search(arg, tld="com", lang="en", num=5, start=0, stop=1, pause=1.0)
+        glist=list(glist)
+        try:
+            url=glist[0]
+        except IndexError:
+            await ctx.send(f"{ctx.author.mention} No results found.")
+        else:
+            await ctx.send(f"{ctx.author.mention} Here is your google result:\n{url}")
+    
+    
+>>>>>>> desktop-test
     @commands.command(name="hangman", help="play hangman with wormi!")
     async def hangman(self, ctx):
         stage=[ #raw AND escaping to deal with discord formatting
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/
     |
     |
@@ -250,7 +476,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |
     |
@@ -259,7 +489,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |
@@ -268,7 +502,11 @@ r"""
     |       
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |     |
@@ -277,7 +515,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |   \/|
@@ -286,7 +528,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |   \/|\
@@ -295,7 +541,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |   \/|\
@@ -304,7 +554,11 @@ r"""
     |
     |\_\_\_""",
 r"""
+<<<<<<< HEAD
     \_\_\_\_\_\_\_\_
+=======
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+>>>>>>> desktop-test
     |\/   |
     |   (\_)
     |   \/|\
@@ -313,9 +567,13 @@ r"""
     |
     |\_\_\_"""]
         words=["automobile", "cookies", "homeoffice", "wormageddon", "cheese", "dice", "bottle", "gaming", "riseofkingdoms", "bacon", "caterpillar", "servant", "geometry", "halloween", "telephone", "triangle", "farming", "hunting", "trade", "vegetable", "border", "grandmother", "policeman", "remarkable", "occasionally", "explanation", "fireplace", "discussion", "manufacturing", "mathematics", "biology", "shark", "tiger", "dolphin", "horse", "beer", "distance", "mysterious", "selection", "communism", "capitalism", "arrangement", "doctor", "raft", "waterfall", "jungle", "teabag"]
+<<<<<<< HEAD
         if ctx.channel.id!=697082176432373831:
             await ctx.send(f"{ctx.author.mention} Please use {self.bot.get_channel(697082176432373831).mention}.")
         else:
+=======
+        if ctx.channel.id==697082176432373831 or ctx.channel.id==718825098462625853:
+>>>>>>> desktop-test
             word=random.choice(words)
             mask="`"
             for _ in range(len(word)):
@@ -336,7 +594,15 @@ r"""
 
                 #custom check for wait_for
                 def check(waited):
+<<<<<<< HEAD
                     return waited.author.bot==False and waited.channel.id==697082176432373831
+=======
+                    if ctx.channel.id==697082176432373831:
+                        id=697082176432373831
+                    elif ctx.channel.id==718825098462625853:
+                        id=718825098462625853
+                    return waited.author.bot==False and waited.channel.id==id
+>>>>>>> desktop-test
                 
                 try:
                     mes=await self.bot.wait_for("message", timeout=30, check=check)
@@ -371,4 +637,13 @@ r"""
                     else:
                         await ctx.send("Incorrect!")
                         wrong+=f"{char} "
+<<<<<<< HEAD
                         turn+=1
+=======
+                        turn+=1
+        else:
+            if ctx.guild.id==530157406349688862:#WgD
+                await ctx.send(f"{ctx.author.mention} Please use {self.bot.get_channel(697082176432373831).mention}.")
+            elif ctx.guild.id==717760982729883689:#VpS
+                await ctx.send(f"{ctx.author.mention} Please use {self.bot.get_channel(718825098462625853).mention}.")
+>>>>>>> desktop-test

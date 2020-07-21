@@ -1,9 +1,13 @@
 #Libraries___________________________________________________________________________________________________________________________________________________________________________
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
+<<<<<<< HEAD
 
 
 import discord, datetime, configparser, sys, json
+=======
+import discord, datetime, configparser, sys, json, os
+>>>>>>> desktop-test
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
@@ -13,8 +17,13 @@ bot=commands.Bot(command_prefix='!')
 
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
+<<<<<<< HEAD
 bot.load_extension('cogs.AOO')
 bot.load_extension('cogs.YT') #WIP
+=======
+bot.load_extension('cogs.newAOO')
+#bot.load_extension('cogs.YT') #WIP
+>>>>>>> desktop-test
 bot.remove_command('help') #Custom help command
 
 
@@ -33,8 +42,15 @@ async def on_ready():
 #Error handling
 @bot.event
 async def on_command_error(ctx, error):
+    if ctx.guild.id==717760982729883689:#VpS
+        channel=bot.get_channel(717774758149619743)
+    elif ctx.guild.id==530157406349688862:#WgD
+        channel=bot.get_channel(713320018984697956)
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send(f"{ctx.author.mention} This command doesnt exist.")
+        if ctx.author.id==517098993180868642:
+            await ctx.send(f"Jeez {ctx.author.mention}, just look up <#722575695141929046> and stop bothering me with your weird requests.")
+        else:
+            await ctx.send(f"{ctx.author.mention} This command doesn't exist.")
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"{ctx.author.mention} I'm missing additional information/arguments to run the command. Try !help or ask around.")
     elif isinstance(error, commands.TooManyArguments):
@@ -43,13 +59,19 @@ async def on_command_error(ctx, error):
         await ctx.send(f"{ctx.author.mention} This command can't be used in private channels.")
     elif isinstance(error, commands.MissingAnyRole):
         await ctx.send(f"{ctx.author.mention} You are missing the needed role to use this command.")
+    elif isinstance(error, commands.CheckFailure):
+        if ctx.guild.id==530157406349688862:#WgD
+            await ctx.send(f"{ctx.author.mention} Please use {bot.get_channel(558632300737462272).mention}.")
+        elif ctx.guild.id==717760982729883689:#VpS
+            await ctx.send(f"{ctx.author.mention} Please use {bot.get_channel(717760982729883692).mention}.")
     else:
         await ctx.send(f"{ctx.author.mention} Something went wrong. :(")
         DT=datetime.datetime.now()
         print(DT.strftime("%d.%m.%Y %H:%M"))
-        print(f'"', ctx.command.name, '" was invoked incorrectly by ', ctx.author.display_name, sep="")
+        print(f'{ctx.command.name} was invoked incorrectly by {ctx.author.display_name}')
         print(error)
         print()
+        await channel.send(f"{ctx.command.name} was invoked incorrectly by {ctx.author.display_name}\n{error}\n\n")
 
 
 #Welcoming new Members via DM, setting role to unverified
@@ -57,25 +79,28 @@ async def on_command_error(ctx, error):
 async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send(f'''Hello {member.mention}!
-Im Wormi, and you just joined the [WgD] Discord Server!
-Please write a short message I can forward to the Server Admins.
-This message should include your Ingame name, so we can assign a proper rank to you and let you enjoy all these beautifull channels!
-Additionally you could check out the lobby and change your nickname to avoid any confusion.
+I'm Wormi, and you just joined {member.guild.name}'s discord server!
+Please write a short message I can forward to the R4s.
+This message should include your ingame name, so we can assign a proper rank to you and let you enjoy all these beautifull channels!
+Additionally you should check out the lobby and change your nickname to avoid any confusion.
 
-Please start your message with **!registration followed by your text**, else I wont recognize you are talking to me. You also can't send more than one message.
-For example: !registration Hey, Im Wormi, nice to meet you!''')
-    server= await bot.fetch_guild(530157406349688862)
-    role=server.get_role(643047153677369355)
+Please start your message with **!registration followed by your text**, else I wont recognize you are talking to me. You also can't send more than one message :(.
+For example: !registration Hey Wormi, Im Wormi! Nice to meet you!''')
+    server= await bot.fetch_guild(member.guild.id)
+    if server.id==717760982729883689:#VpS
+        role=server.get_role(719502497982447766)
+    elif server.id==530157406349688862:#WgD
+        role=server.get_role(643047153677369355)
     await member.add_roles(role)
 
-#Forwarding PM to registration channel, removing not-verified
-@bot.command(name="registration", help="command for registration on discord, not-verified role only")
+#Forwarding PM to registration channel, removing unverified
+@bot.command(name="registration", help="command for registration on discord, unverified role only")
 async def registration(ctx, *, arg):
-    server= await bot.fetch_guild(530157406349688862)
-    member=await server.fetch_member(ctx.author.id)
-    role=server.get_role(643047153677369355)
+    server= await bot.fetch_guild(717760982729883689)
+    member= await server.fetch_member(ctx.author.id)
+    role=server.get_role(719502497982447766)
     if member.top_role==role:
-        channel = bot.get_channel(641262602730733568)
+        channel = bot.get_channel(717774509096042567)#VpS(641262602730733568)WgD
         await channel.send(f'''Hey! {ctx.author.mention} has arrived! Here is a message for you!
 {arg}''')
         await member.remove_roles(role)
@@ -85,17 +110,44 @@ async def registration(ctx, *, arg):
 
 @bot.event
 async def on_member_remove(member):
-    channel = bot.get_channel(641262602730733568)
-    await channel.send(f'{member.mention} left the server.')
+    if member.guild.id==717760982729883689:#VpS
+        channel = bot.get_channel(717774509096042567)
+    elif member.guild.id==530157406349688862:#WgD
+        channel = bot.get_channel(641262602730733568)
+    await channel.send(f'{member.mention} ({member.display_name}) left the server.')
 
 
+<<<<<<< HEAD
 @bot.command(name="sys.exit", help="Terminate Bot")
+=======
+@bot.command(name="logout", help="Terminate Bot")
+>>>>>>> desktop-test
 @commands.has_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
-    sys.exit(0)
+    await bot.logout()
 
 
+@bot.command(name="updatejson")
+@commands.has_any_role('Discord King', 'Leader')
+async def update_json(ctx):
+    clan=ctx.guild
+    dic={}
+    for member in clan.members:
+        dic[member.display_name]=member.mention
+    if clan.id==717760982729883689:#VpS
+        with open ('./memberVpS.json', 'w') as d:
+            json.dump(dic, d)
+            d.truncate()
+        await ctx.send(f"{ctx.author.mention} JSON updated.")
+    elif clan.id==530157406349688862:#WgD
+        with open ('./memberWgD.json', 'w') as d:
+            json.dump(dic, d)
+            d.truncate()
+        await ctx.send(f"{ctx.author.mention} JSON updated.")
+
+
+<<<<<<< HEAD
 @bot.command(name="updatejson")
 @commands.has_any_role('Discord King', 'Leader')
 async def update_json(ctx):
@@ -110,6 +162,8 @@ async def update_json(ctx):
 
 
 
+=======
+>>>>>>> desktop-test
 #WIP
 @bot.command(name='help', help='Shows all commands')
 async def CustomHelpCommand(ctx):
@@ -120,6 +174,10 @@ async def CustomHelpCommand(ctx):
     #total_commands=bot.commands
     #print(total_commands)
     #comm=await HelpCommand.filter_commands(total_commands, total_commands, sort=False, key=None) #ERROR Type=Set
+<<<<<<< HEAD
+=======
+    #print(comm)
+>>>>>>> desktop-test
     helptext1=""
     for command in bot.commands:
         if command.cog==None:
@@ -131,7 +189,11 @@ async def CustomHelpCommand(ctx):
     helptext2=""
     for command in bot.commands:
         if command.cog!=None:
+<<<<<<< HEAD
             if command.cog.qualified_name=="AOO":
+=======
+            if command.cog.qualified_name=="newAOO":
+>>>>>>> desktop-test
                 if len(helptext2)>1:
                     helptext2+=f", `{command}`"
                 else:
@@ -157,9 +219,50 @@ async def CustomHelpCommand(ctx):
     embed.add_field(name=":tools: Tools:", value=helptext4, inline=False)
     await ctx.send(embed=embed)
 
+<<<<<<< HEAD
 
 #Token needed to access discord
 cp=configparser.ConfigParser()  
 cp.read('./config.ini')
 token=cp.get('DEFAULT', 'token')
 bot.run(token)
+=======
+@bot.command(name="restart", help="restart wormi, checking for updates")
+@commands.has_any_role("Discord King")
+async def restart(ctx):
+    await ctx.send("Restarting. Please wait.")
+    await bot.logout()
+    try:
+        os.system("cd /home/nico/Python/Wormi/\npython3 /home/nico/Python/Wormi/restart.py")
+    except:
+        bot.run(token)
+
+
+
+if __name__=="__main__":
+    #Checking for update
+    try:
+        file1=open("version.txt", "r")
+        version1=int(file1.readline())
+        file1.close()
+        file2=open("/home/nico/Windows_Share/version.txt", "r")
+        version2=int(file2.readline())
+        file2.close()
+    except:
+        print("Error in update check")
+        #skipping update
+        version1, version2=0, 0
+    if not (version1<version2):
+        print("No update found.")
+        #Token needed to access discord
+        cp=configparser.ConfigParser()
+        cp.read('./config.ini')
+        token=cp.get('DEFAULT', 'token')
+        bot.run(token)
+    else:
+        print("Update found. Starting update.py")
+        try:
+            os.system("cd /home/nico/Python/Wormi/\npython3 /home/nico/Python/Wormi/update.py")
+        except:
+            print("update.py not found.")
+>>>>>>> desktop-test

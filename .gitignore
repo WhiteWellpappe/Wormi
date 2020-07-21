@@ -1,7 +1,10 @@
 *.ini
 *.json
 aoo.xlsx
+<<<<<<< HEAD
 config.ini
+=======
+>>>>>>> desktop-test
 pics/*
 pics/*/*
 pics/*/*/*
@@ -9,4 +12,10 @@ pics/*/*/*
 __pycache__/*
 cogs/__pycache__
 cogs/__pycache__/*
+<<<<<<< HEAD
 ttt.py
+=======
+.google-cookie
+.vscode
+version.txt
+>>>>>>> desktop-test
