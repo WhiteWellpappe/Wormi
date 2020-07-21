@@ -1,13 +1,9 @@
 #Libraries___________________________________________________________________________________________________________________________________________________________________________
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
-<<<<<<< HEAD
 
 
-import discord, datetime, configparser, sys, json
-=======
 import discord, datetime, configparser, sys, json, os
->>>>>>> desktop-test
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
@@ -17,13 +13,8 @@ bot=commands.Bot(command_prefix='!')
 
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
-<<<<<<< HEAD
-bot.load_extension('cogs.AOO')
-bot.load_extension('cogs.YT') #WIP
-=======
 bot.load_extension('cogs.newAOO')
 #bot.load_extension('cogs.YT') #WIP
->>>>>>> desktop-test
 bot.remove_command('help') #Custom help command
 
 
