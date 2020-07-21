@@ -3,11 +3,6 @@ The official [WgD] and [VpS] Discord Bot under development by White Worm
 
 This repo is to gain experience with GitHub functions and to protocol changes.
 
-<<<<<<< HEAD
-
-
-
-=======
 This reposition is to gain experience with Git/GitHub functions and to protocol changes.
 
 
@@ -28,7 +23,6 @@ NEW:
 - !google - showing first google search result for given keywords
 
 
->>>>>>> desktop-test
 
 v1.3
 

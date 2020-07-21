@@ -1,13 +1,7 @@
 #Libraries___________________________________________________________________________________________________________________________________________________________________________
 
 #LINUX VERSION, AVOIDING LIBRARIES NOT AVAIBLE FOR LINUX
-<<<<<<< HEAD
-
-
-import discord, datetime, configparser, sys, json
-=======
 import discord, datetime, configparser, sys, json, os
->>>>>>> desktop-test
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
@@ -17,13 +11,8 @@ bot=commands.Bot(command_prefix='!')
 
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
-<<<<<<< HEAD
-bot.load_extension('cogs.AOO')
-bot.load_extension('cogs.YT') #WIP
-=======
 bot.load_extension('cogs.newAOO')
 #bot.load_extension('cogs.YT') #WIP
->>>>>>> desktop-test
 bot.remove_command('help') #Custom help command
 
 
@@ -117,11 +106,7 @@ async def on_member_remove(member):
     await channel.send(f'{member.mention} ({member.display_name}) left the server.')
 
 
-<<<<<<< HEAD
-@bot.command(name="sys.exit", help="Terminate Bot")
-=======
 @bot.command(name="logout", help="Terminate Bot")
->>>>>>> desktop-test
 @commands.has_any_role('Discord King', 'Leader')
 async def sysexit(ctx):
     await ctx.send(f'{ctx.author.mention} Bye!')
@@ -147,23 +132,6 @@ async def update_json(ctx):
         await ctx.send(f"{ctx.author.mention} JSON updated.")
 
 
-<<<<<<< HEAD
-@bot.command(name="updatejson")
-@commands.has_any_role('Discord King', 'Leader')
-async def update_json(ctx):
-    memlist=ctx.guild.members
-    dic={}
-    for mem in memlist:
-        dic[mem.display_name]=mem.mention
-    with open ('./member.json', 'w') as d:
-        json.dump(dic, d)
-        d.truncate()
-    await ctx.send(f"{ctx.author.mention} JSON updated.")
-
-
-
-=======
->>>>>>> desktop-test
 #WIP
 @bot.command(name='help', help='Shows all commands')
 async def CustomHelpCommand(ctx):
@@ -174,10 +142,7 @@ async def CustomHelpCommand(ctx):
     #total_commands=bot.commands
     #print(total_commands)
     #comm=await HelpCommand.filter_commands(total_commands, total_commands, sort=False, key=None) #ERROR Type=Set
-<<<<<<< HEAD
-=======
     #print(comm)
->>>>>>> desktop-test
     helptext1=""
     for command in bot.commands:
         if command.cog==None:
@@ -189,11 +154,7 @@ async def CustomHelpCommand(ctx):
     helptext2=""
     for command in bot.commands:
         if command.cog!=None:
-<<<<<<< HEAD
-            if command.cog.qualified_name=="AOO":
-=======
             if command.cog.qualified_name=="newAOO":
->>>>>>> desktop-test
                 if len(helptext2)>1:
                     helptext2+=f", `{command}`"
                 else:
@@ -219,14 +180,6 @@ async def CustomHelpCommand(ctx):
     embed.add_field(name=":tools: Tools:", value=helptext4, inline=False)
     await ctx.send(embed=embed)
 
-<<<<<<< HEAD
-
-#Token needed to access discord
-cp=configparser.ConfigParser()  
-cp.read('./config.ini')
-token=cp.get('DEFAULT', 'token')
-bot.run(token)
-=======
 @bot.command(name="restart", help="restart wormi, checking for updates")
 @commands.has_any_role("Discord King")
 async def restart(ctx):
@@ -265,4 +218,3 @@ if __name__=="__main__":
             os.system("cd /home/nico/Python/Wormi/\npython3 /home/nico/Python/Wormi/update.py")
         except:
             print("update.py not found.")
->>>>>>> desktop-test

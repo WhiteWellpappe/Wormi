@@ -22,18 +22,11 @@ class Tools(commands.Cog, name='Tools'):
         count=await ctx.prune_members(self, ctx, days=30, compute_prune_count=True, reason="You were inactive for 30 or more days. Hit us up when you are back!")
         await ctx.send(f"{ctx.author.mention} I kicked {count} members.")
     
-<<<<<<< HEAD
-    #Kicking all inactive members (>45d)
-=======
     #Kicking all inactive members (>30d)
->>>>>>> desktop-test
     @commands.command(name="checkinactive", help="check for inactive (>30d)")
     @commands.has_any_role('Discord King', 'Leader', 'Officer')
     async def checkinactive (self, ctx):
         count=await ctx.guild.estimate_pruned_members(days=30)
-<<<<<<< HEAD
-        await ctx.send(f"{ctx.author.mention} {count} members are inactive.")  
-=======
         await ctx.send(f"{ctx.author.mention} {count} members are inactive.")
 
     #Giving pairing suggestions based on keyword
@@ -54,4 +47,3 @@ class Tools(commands.Cog, name='Tools'):
             await ctx.send(embed=embed)
         else:
             await ctx.send(f"{ctx.author.mention} No pairings found.")
->>>>>>> desktop-test
