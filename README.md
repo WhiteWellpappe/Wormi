@@ -1,7 +1,7 @@
 # Wormi
 The official [WgD] and [VpS] Discord Bot under development by White Worm
 
-This repo is to gain experience with GitHub functions and to protocol changes.
+
 
 This reposition is to gain experience with Git/GitHub functions and to protocol changes.
 
