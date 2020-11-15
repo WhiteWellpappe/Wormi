@@ -11,4 +11,6 @@ cogs/__pycache__
 cogs/__pycache__/*
 .google-cookie
 .vscode
+.idea
 version.txt
+.pickle

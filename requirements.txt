@@ -1,0 +1,7 @@
+discord.py
+configparser
+youtube_dl
+datefinder
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

@@ -1,34 +1,39 @@
-import os, shutil
+import os
+import shutil
 
-if __name__=="__main__":
-    path="/home/nico/Python/Wormi/"
-    #deleting old files and directories
-    for old in ("pairings.json", "version.txt", "Wormi.py"):       
+if __name__ == "__main__":
+    # deleting old files and directories & copying new files and directories from share
+    path = "/home/pi/Python/Wormi/"
+    share = "/home/pi/share/"
+    pool = os.listdir(share)
+    for files in pool:
+        if os.path.isfile(os.path.join(path, files)):
+            try:
+                os.unlink(path+files)
+            except Exception:
+                print(f"Deleting {files} failed.\n{Exception}" )
+            try:
+                shutil.copy(share+files, path)
+            except Exception:
+                print(f"Copying {files} failed.\n{Exception}")
+    for dir in ("cogs", "pics"):
         try:
-            os.unlink(path+old)
-        except:
-            print(f"{old} not found.")
-    for old in ("cogs", "pics"):
+            shutil.rmtree(path+dir)
+        except Exception:
+            print(f"Deleting {dir} failed.\n{Exception}")
         try:
-            shutil.rmtree(path+old)
-        except:
-            print(f"{old} not found")
-    #copying new files and directories from share
-    share="/home/nico/Windows_Share/"
-    for new in ("Wormi.py", "pairings.json", "version.txt"):
-        try:
-            shutil.copy(share+new, path)
-        except:
-            print(f"Copying {new} failed.")
-    for new in ("cogs", "pics"):
-        try:
-            shutil.copytree(share+new, path+new)
-        except:
-            print(f"Copying {new} failed.")
-    #finishing update
-    print("Update finished.\nStarting wormi.py")
+            shutil.copytree(share + dir, path + dir)
+        except Exception:
+            print(f"Copying {dir} failed.\n{Exception}")
+    # finishing update
+    print("Update finished.\nChecking for libraries.")
     try:
-        os.system("cd /home/nico/Python/Wormi/\npython3 /home/nico/Python/Wormi/Wormi.py")
-    except:
-        print("Wormi.py not found.")
-    
+        # keeping libraries updated
+        os.system(f"cd {path}\npip3.8 install -r requirements.txt")
+    except Exception:
+        print(f"requirements.txt not found or corrupted.\n{Exception}")
+    try:
+        print("Completed. Starting Wormi.py")
+        os.system(f"cd {path}\npython3.8 {path}Wormi.py")
+    except Exception:
+        print(f"Wormi.py not found.\n{Exception}")
