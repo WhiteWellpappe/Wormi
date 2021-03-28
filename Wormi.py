@@ -1,30 +1,33 @@
-# Libraries___________________________________________________________________________________________________________________________________________________________________________
-
+# Libraries_____________________________________________________________________________________________________________
 # LINUX VERSION, AVOIDING LIBRARIES NOT AVAILABLE FOR LINUX
 import discord, datetime, configparser, sys, json, os, asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
-# Variables & Initialisation__________________________________________________________________________________________________________________________________________________________
-bot = commands.Bot(command_prefix='!')
+# Variables & Initialisation____________________________________________________________________________________________
+intents = discord.Intents.default()
+intents.members = True
+intents.reactions = True
+
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.newAOO')
 bot.load_extension('cogs.Calendar')
+
 # bot.load_extension('cogs.YT') #WIP
 bot.remove_command('help')  # Custom help command
 
 
-# Program____________________________________________________________________________________________________________________________________________________________________________
+# Program_______________________________________________________________________________________________________________
 @bot.event
 async def on_ready():
     dt = datetime.datetime.now()
     print(dt.strftime("%d.%m.%Y %H:%M"))
     print(f'We have logged in as {bot.user}')
     print()
-    # activity=discord.CustomActivity(name="hates Linux")
-    activity = discord.Activity(name="hates linux", type=discord.ActivityType.playing)
+    activity = discord.Activity(name="thinks linux is life", type=discord.ActivityType.playing)
     await bot.change_presence(activity=activity)
 
 
@@ -90,7 +93,10 @@ For example: !registration Hey Wormi, Im Wormi! Nice to meet you!''')
         role = server.get_role(719502497982447766)
     elif server.id == 530157406349688862:  # WgD
         role = server.get_role(643047153677369355)
-    await member.add_roles(role)
+    try:
+        await member.add_roles(role)
+    except:
+        pass
 
 
 # Forwarding PM to registration channel, removing unverified
@@ -233,7 +239,8 @@ if __name__ == "__main__":
         cp = configparser.ConfigParser()
         cp.read('./config.ini')
         token = cp.get('DEFAULT', 'token')
-        bot.run(token)
+        # bot.run(token)
+        bot.run("NzA4MjQxMTk5MDY0MTU0MTg2.XrUfBA.XVHvncw5RxVnNPLam3e-I6B05P0")
     else:
         print("Update found. Starting update.py")
         try:

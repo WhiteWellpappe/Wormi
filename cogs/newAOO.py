@@ -37,7 +37,7 @@ class newAOO(commands.Cog, name='newAOO'):
     @commands.command(name="aoo", help="new aoo registration system")
     @commands.has_any_role('Discord King', 'Leader', "Officer", "Wormanager")
     async def aooreaction(self, ctx, date, time_sat=20, time_sun=20):
-        if ctx.guild.id != 530157406349688862:
+        if ctx.guild.id is None:
             await ctx.send("This command is only usable in WgD for now :(")
         else:
             if date is None:
@@ -91,16 +91,10 @@ class newAOO(commands.Cog, name='newAOO'):
                         title=f"Ark Of Osiris {date}/{date2} Announcement"
                     )
                     self.loop_active = True
-                    self.embed_ann.add_field(name="Announcement",
-                                             value=f":loudspeaker: **It's AOO Voting time!**\n\n**Please use the shown reaction to register!**\n\n**FOR WgDF**\n1️⃣ - Only Sat, {date}, {time_sat}:00 UTC\n2️⃣ - Only Sun, {date2}, {time_sun}:00 UTC\n3️⃣ - Can do both, vote for/prefer saturday\n4️⃣ - Can do both, vote for/prefer sunday\n\nWormi will update this message every 3s. **Please confirm your name appears!**\nOnly your latest reaction will taken into account. New votes will be voided if 25 participants are reached for the selected day.\n\n:taco: **25 slots, 5 reserved**, First Come First Serve system\n\n:hamburger: Start voting now, end on Thursday or when full.\n:pie: You can void all registrations and your vote by deselecting your reaction.\n\n:carrot: If you encounter an error, please hit up any R4 right away.",
-                                             inline=False)
-                    self.embed_ann.add_field(name="Votes",
-                                             value=f"Votes for Saturday: {self.votesat}\n Votes for Sunday: {self.votesun}",
-                                             inline=False)
-                    self.embed_ann.add_field(name=f"Participants for Saturday: {self.partsat}", value=self.listsat,
-                                             inline=False)
-                    self.embed_ann.add_field(name=f"Participants for Sunday: {self.partsun}", value=self.listsun,
-                                             inline=False)
+                    self.embed_ann.add_field(name="Announcement", value=f":loudspeaker: **It's AOO Voting time!**\n\n**Please use the shown reaction to register!**\n\n**FOR WgDF**\n1️⃣ - Only Sat, {date}, {time_sat}:00 UTC\n2️⃣ - Only Sun, {date2}, {time_sun}:00 UTC\n3️⃣ - Can do both, vote for/prefer saturday\n4️⃣ - Can do both, vote for/prefer sunday\n\nWormi will update this message every 3s. **Please confirm your name appears!**\nOnly your latest reaction will taken into account. New votes will be voided if 25 participants are reached for the selected day.\n\n:taco: **25 slots, 5 reserved**, First Come First Serve system\n\n:hamburger: Start voting now, end on Thursday or when full.\n:pie: You can void all registrations and your vote by deselecting your reaction.\n\n:carrot: If you encounter an error, please hit up any R4 right away.",inline=False)
+                    self.embed_ann.add_field(name="Votes", value=f"Votes for Saturday: {self.votesat}\n Votes for Sunday: {self.votesun}",inline=False)
+                    self.embed_ann.add_field(name=f"Participants for Saturday: {self.partsat}", value=self.listsat, inline=False)
+                    self.embed_ann.add_field(name=f"Participants for Sunday: {self.partsun}", value=self.listsun, inline=False)
                     self.ann = await ctx.send("@everyone", embed=self.embed_ann)
                     for x in ("1️⃣", "2️⃣", "3️⃣", "4️⃣"):
                         await self.ann.add_reaction(x)
@@ -113,22 +107,15 @@ class newAOO(commands.Cog, name='newAOO'):
                     if ctx.channel.id == 651033088943587328:
                         # enabling writing/reading/history for members for feedback
                         role = ctx.guild.get_role(530162542148976661)
-                        await ctx.channel.set_permissions(role, read_messages=True, send_messages=True,
-                                                          view_channel=True, read_message_history=True)
+                        await ctx.channel.set_permissions(role, read_messages=True, send_messages=True, view_channel=True, read_message_history=True)
 
                     while self.loop_active:
                         await asyncio.sleep(4.5)
                         try:
                             listreact = self.ann.reactions
-                            # counting reactions
-                            self.votesat_new = listreact[0].count + listreact[2].count - 2
-                            self.votesun_new = listreact[1].count + listreact[3].count - 2
-                            # if change in recent reactions //DOESNT COVER CHANGED PLAYERS IF VOTE REMAINS CONSTANT
-                            # if (self.votesat_new!=self.votesat) or (self.votesun_new!=self.votesun):
-                            # updating votes
-                            self.votesat = self.votesat_new
-                            self.votesun = self.votesun_new
-                            # getting users, flatten list
+                            # counting/updating reactions, getting users by flatten list
+                            self.votesat = listreact[0].count + listreact[2].count - 2
+                            self.votesun = listreact[1].count + listreact[3].count - 2
                             flatsat = await listreact[0].users().flatten() + await listreact[2].users().flatten() + await listreact[3].users().flatten()
                             flatsun = await listreact[1].users().flatten() + await listreact[2].users().flatten() + await listreact[3].users().flatten()
                             # adding players to displayed lists
@@ -143,7 +130,6 @@ class newAOO(commands.Cog, name='newAOO'):
                                     continue
                                 elif user.display_name not in self.listsun:
                                     self.listsun += f"{user.display_name}\n"
-                            # no list remains empty
                             if self.listsat == "":
                                 self.listsat = "Placeholder\n"
                             if self.listsun == "":
@@ -151,24 +137,19 @@ class newAOO(commands.Cog, name='newAOO'):
                             # counting players for both days
                             self.partsat = listreact[0].count + listreact[2].count + listreact[3].count - 3
                             self.partsun = listreact[1].count + listreact[2].count + listreact[3].count - 3
-                            # delete vote/participants saturday/participants sunday fields in embed
+                            # update vote/participants saturday/sunday fields in embed
                             ea = self.embed_ann
                             for _ in range(3):
                                 ea.remove_field(1)
-                            # adding fields with updated values
-                            ea.add_field(name="Votes",
-                                         value=f"Votes for Saturday: {self.votesat}\n Votes for Sunday: {self.votesun}",
-                                         inline=False)
-                            ea.add_field(name=f"Participants for Saturday: {self.partsat}", value=self.listsat,
-                                         inline=False)
-                            ea.add_field(name=f"Participants for Sunday: {self.partsun}", value=self.listsun,
-                                         inline=False)
-                            # editing message
+                            ea.add_field(name="Votes", value=f"Votes for Saturday: {self.votesat}\n Votes for Sunday: {self.votesun}", inline=False)
+                            ea.add_field(name=f"Participants for Saturday: {self.partsat}", value=self.listsat, inline=False)
+                            ea.add_field(name=f"Participants for Sunday: {self.partsun}", value=self.listsun, inline=False)
                             await self.ann.edit(content="@everyone", embed=ea)
+
                             # little delay to ensure message is there to be fetched
                             await asyncio.sleep(0.5)
                             self.ann = await ctx.fetch_message(ann_id)
-                            # reseting error counter after succesfull update
+                            # resetting error counter after successfully updating
                             self.error_count = 0
                         except:
                             try:
@@ -185,7 +166,7 @@ class newAOO(commands.Cog, name='newAOO'):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, pl):
-        if pl.guild_id == 530157406349688862:  # WgD
+        if pl.guild_id == 786911466330128404:  # Test WgD
             try:
                 ann = await self.ann.channel.fetch_message(self.ann.id)
             except:

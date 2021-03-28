@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 
 random.seed()
 
+
 def setup(bot):
     bot.add_cog(Fun(bot))
 
@@ -413,7 +414,7 @@ r"""
     |
     |\_\_\_"""]
         words = ["automobile", "cookies", "homeoffice", "wormageddon", "cheese", "dice", "bottle", "gaming", "riseofkingdoms", "bacon", "caterpillar", "servant", "geometry", "halloween", "telephone", "triangle", "farming", "hunting", "trade", "vegetable", "border", "grandmother", "policeman", "remarkable", "occasionally", "explanation", "fireplace", "discussion", "manufacturing", "mathematics", "biology", "shark", "tiger", "dolphin", "horse", "beer", "distance", "mysterious", "selection", "communism", "capitalism", "arrangement", "doctor", "raft", "waterfall", "jungle", "teabag"]
-        if ctx.channel.id == 697082176432373831 or ctx.channel.id == 718825098462625853:
+        if ctx.channel.id == 697082176432373831 or ctx.channel.id == 718825098462625853 or ctx.channel.id == 787641103507521547 or ctx.channel.id == 786915181078642688:
             word = random.choice(words)
             mask = "`"
             for _ in range(len(word)):
@@ -434,11 +435,11 @@ r"""
 
                 # custom check for wait_for
                 def check(waited):
-                    if ctx.channel.id == 697082176432373831:
-                        id = 697082176432373831
-                    elif ctx.channel.id == 718825098462625853:
-                        id = 718825098462625853
-                    return waited.author.bot == False and waited.channel.id == id
+                    # if ctx.channel.id == 697082176432373831:
+                    #     id = 697082176432373831
+                    # elif ctx.channel.id == 718825098462625853:
+                    #     id = 718825098462625853
+                    return waited.author.bot is False and waited.channel.id == ctx.channel.id
 
                 try:
                     mes = await self.bot.wait_for("message", timeout=30, check=check)
