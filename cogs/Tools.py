@@ -13,8 +13,8 @@ class Tools(commands.Cog, name='Tools'):
     # Servertime
     @commands.command(name="utc", help="shows current utc time")
     async def utc(self, ctx):
-        DT = "It's " + datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M") + " UTC"
-        await ctx.send(DT)
+        dt = "It's " + datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M") + " UTC"
+        await ctx.send(dt)
 
     # Kicking all inactive members (>45d)
     @commands.command(name="kickinactive", help="kicks all inactive, roleless members (>30d)")

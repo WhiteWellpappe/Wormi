@@ -72,8 +72,8 @@ async def on_command_error(ctx, error):
             await channel.send(f"{ctx.command.name} was invoked incorrectly by {ctx.author.display_name}\n{error}\n\n")
         except AttributeError:
             print("No channel found. Ctx is probably none")
-        except UnboundLocalError:
-            pass
+        except UnboundLocalError as e:
+            print(f"Unboud local error: {e}")
 
 
 # Welcoming new Members via DM, setting role to unverified
@@ -226,8 +226,8 @@ if __name__ == "__main__":
         file2 = open("/home/pi/share/version.txt", "r")
         version2 = int(file2.readline())
         file2.close()
-    except Exception:
-        print(f"Error in update check\n{Exception}")
+    except Exception as e:
+        print(f"Error in update check\n{e}")
         # skipping update
         version1, version2 = 0, 0
     if not (version1 < version2):
@@ -241,5 +241,5 @@ if __name__ == "__main__":
         print("Update found. Starting update.py")
         try:
             os.system("cd /home/pi/Python/Wormi/\npython3.8 ./update.py")
-        except Exception:
-            print(f"update.py not found.\n{Exception}")
+        except Exception as e:
+            print(f"update.py not found.\n{e}")

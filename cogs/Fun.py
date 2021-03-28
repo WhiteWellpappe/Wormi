@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 
 random.seed()
 
+
 def setup(bot):
     bot.add_cog(Fun(bot))
 
@@ -305,7 +306,7 @@ class Fun(commands.Cog, name='Fun'):
             with open("./memberVpS.json", "r") as d:
                 dic = json.load(d)
         for key in dic:
-            if regex.search(key) != None:
+            if regex.search(key) is None:
                 await ctx.send(
                     f"{dic[key]} <a:panda_fire:715502370229846027><a:panda_fire:715502370229846027><a:panda_fire:715502370229846027>")
                 break
@@ -335,12 +336,11 @@ class Fun(commands.Cog, name='Fun'):
             await ctx.send(f"{ctx.author.mention} No results found.")
         else:
             await ctx.send(f"{ctx.author.mention} Here is your google result:\n{url}")
-    
-    
+
     @commands.command(name="hangman", help="play hangman with wormi!")
     async def hangman(self, ctx):
-        stage=[ #raw AND escaping to deal with discord formatting
-r"""
+        stage = [  # raw AND escaping to deal with discord formatting
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/
     |
@@ -349,7 +349,7 @@ r"""
     |
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |
@@ -358,7 +358,7 @@ r"""
     |
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -367,7 +367,7 @@ r"""
     |  
     |       
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -376,7 +376,7 @@ r"""
     |
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -385,7 +385,7 @@ r"""
     |
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -394,7 +394,7 @@ r"""
     |
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -403,7 +403,7 @@ r"""
     |   \/
     |
     |\_\_\_""",
-r"""
+            r"""
     \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
     |\/   |
     |   (\_)
@@ -412,7 +412,12 @@ r"""
     |   \/ \
     |
     |\_\_\_"""]
-        words = ["automobile", "cookies", "homeoffice", "wormageddon", "cheese", "dice", "bottle", "gaming", "riseofkingdoms", "bacon", "caterpillar", "servant", "geometry", "halloween", "telephone", "triangle", "farming", "hunting", "trade", "vegetable", "border", "grandmother", "policeman", "remarkable", "occasionally", "explanation", "fireplace", "discussion", "manufacturing", "mathematics", "biology", "shark", "tiger", "dolphin", "horse", "beer", "distance", "mysterious", "selection", "communism", "capitalism", "arrangement", "doctor", "raft", "waterfall", "jungle", "teabag"]
+        words = ["automobile", "cookies", "homeoffice", "wormageddon", "cheese", "dice", "bottle", "gaming",
+                 "riseofkingdoms", "bacon", "caterpillar", "servant", "geometry", "halloween", "telephone", "triangle",
+                 "farming", "hunting", "trade", "vegetable", "border", "grandmother", "policeman", "remarkable",
+                 "occasionally", "explanation", "fireplace", "discussion", "manufacturing", "mathematics", "biology",
+                 "shark", "tiger", "dolphin", "horse", "beer", "distance", "mysterious", "selection", "communism",
+                 "capitalism", "arrangement", "doctor", "raft", "waterfall", "jungle", "teabag"]
         if ctx.channel.id == 697082176432373831 or ctx.channel.id == 718825098462625853:
             word = random.choice(words)
             mask = "`"
@@ -425,8 +430,8 @@ r"""
             playing = True
             while playing:
                 embed.clear_fields()
-                name = (f"{stage[turn]}\n")
-                text = (f"{mask}\nWrong letters: {wrong}\nPlease make your guess.\n")
+                name = f"{stage[turn]}\n"
+                text = f"{mask}\nWrong letters: {wrong}\nPlease make your guess.\n"
                 # text+=(f"Wrong letters: {wrong}\n")
                 # text+=(f"Please make your guess.\n")
                 embed.add_field(name=name, value=text, inline=False)
