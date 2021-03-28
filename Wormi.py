@@ -238,9 +238,9 @@ if __name__ == "__main__":
         # Token needed to access discord
         cp = configparser.ConfigParser()
         cp.read('./config.ini')
-        token = cp.get('DEFAULT', 'token')
+        token = cp.get('DEFAULT', 'test_token')
         # bot.run(token)
-        bot.run("NzA4MjQxMTk5MDY0MTU0MTg2.XrUfBA.XVHvncw5RxVnNPLam3e-I6B05P0")
+        bot.run(token)
     else:
         print("Update found. Starting update.py")
         try:
