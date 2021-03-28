@@ -1,30 +1,33 @@
-# Libraries___________________________________________________________________________________________________________________________________________________________________________
-
+# Libraries_____________________________________________________________________________________________________________
 # LINUX VERSION, AVOIDING LIBRARIES NOT AVAILABLE FOR LINUX
 import discord, datetime, configparser, sys, json, os, asyncio
 from discord.ext import commands
 from discord.ext.commands import Bot, check, CheckFailure, command, HelpCommand
 
-# Variables & Initialisation__________________________________________________________________________________________________________________________________________________________
-bot = commands.Bot(command_prefix='!')
+# Variables & Initialisation____________________________________________________________________________________________
+intents = discord.Intents.default()
+intents.members = True
+intents.reactions = True
+
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 bot.load_extension('cogs.Fun')
 bot.load_extension('cogs.Tools')
 bot.load_extension('cogs.newAOO')
 bot.load_extension('cogs.Calendar')
+
 # bot.load_extension('cogs.YT') #WIP
 bot.remove_command('help')  # Custom help command
 
 
-# Program____________________________________________________________________________________________________________________________________________________________________________
+# Program_______________________________________________________________________________________________________________
 @bot.event
 async def on_ready():
     dt = datetime.datetime.now()
     print(dt.strftime("%d.%m.%Y %H:%M"))
     print(f'We have logged in as {bot.user}')
     print()
-    # activity=discord.CustomActivity(name="hates Linux")
-    activity = discord.Activity(name="hates linux", type=discord.ActivityType.playing)
+    activity = discord.Activity(name="thinks linux is life", type=discord.ActivityType.playing)
     await bot.change_presence(activity=activity)
 
 
